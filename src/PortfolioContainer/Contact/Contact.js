@@ -4,7 +4,9 @@ import emailjs from "emailjs-com";
 // import { ToastContainer, toast } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.min.css";
 
-require("dotenv").config();
+if (typeof require !== "undefined") {
+  require("dotenv").config();
+}
 export default function Contact() {
   const [success, setSuccess] = useState(false);
 
