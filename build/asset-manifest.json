@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d5b0636c.chunk.css",
+    "main.js": "/static/js/main.328d29cf.chunk.js",
+    "main.js.map": "/static/js/main.328d29cf.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.293e6ced.js",
+    "runtime-main.js.map": "/static/js/runtime-main.293e6ced.js.map",
+    "static/js/2.d0b4cebc.chunk.js": "/static/js/2.d0b4cebc.chunk.js",
+    "static/js/2.d0b4cebc.chunk.js.map": "/static/js/2.d0b4cebc.chunk.js.map",
+    "static/js/3.d557aa6e.chunk.js": "/static/js/3.d557aa6e.chunk.js",
+    "static/js/3.d557aa6e.chunk.js.map": "/static/js/3.d557aa6e.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.d5b0636c.chunk.css.map": "/static/css/main.d5b0636c.chunk.css.map",
+    "static/js/2.d0b4cebc.chunk.js.LICENSE.txt": "/static/js/2.d0b4cebc.chunk.js.LICENSE.txt",
+    "static/media/Im.b4a9e324.png": "/static/media/Im.b4a9e324.png",
+    "static/media/Mountain_behind.c9fb9181.png": "/static/media/Mountain_behind.c9fb9181.png",
+    "static/media/Mountain_front.d8398c8d.png": "/static/media/Mountain_front.d8398c8d.png",
+    "static/media/moon.979f2740.png": "/static/media/moon.979f2740.png",
+    "static/media/myImage.ce2be0b7.png": "/static/media/myImage.ce2be0b7.png",
+    "static/media/stars.a190bf69.png": "/static/media/stars.a190bf69.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.293e6ced.js",
+    "static/js/2.d0b4cebc.chunk.js",
+    "static/css/main.d5b0636c.chunk.css",
+    "static/js/main.328d29cf.chunk.js"
+  ]
+}
