@@ -1,25 +1,12 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import emailjs from "emailjs-com";
-// import { ToastContainer, toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.min.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 export default function Contact() {
+  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-
-  // const toastifySuccess = () => {
-  //   toast("Form sent!", {
-  //     position: "bottom-right",
-  //     autoClose: 5000,
-  //     hideProgressBar: true,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: false,
-  //     className: "submit-feedback success",
-  //     toastId: "notifyToast",
-  //   });
-  // };
-
   const {
     register,
     handleSubmit,
@@ -28,26 +15,26 @@ export default function Contact() {
   } = useForm();
 
   const onSubmit = async (data) => {
+    setLoading(true);
     const { name, email, subject, message } = data;
     try {
-      const templateParams = {
-        name,
-        email,
-        subject,
-        message,
-      };
+      const templateParams = { name, email, subject, message };
       await emailjs.send(
         process.env.REACT_APP_SERVICE_ID,
         process.env.REACT_APP_TEMPLATE_ID,
         templateParams,
         process.env.REACT_APP_USER_ID
       );
-      reset(setSuccess(true));
+      setSuccess(true);
+      toast.success("Form sent! Thank you.");
+      reset();
     } catch (e) {
-      // console.log(e);
+      toast.error("Failed to send. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
-  console.log(process.env.REACT_APP_USER_ID);
+
   return (
     <div>
       <h2 className="headMain">Contact</h2>
@@ -58,15 +45,12 @@ export default function Contact() {
           onSubmit={handleSubmit(onSubmit)}
           noValidate
         >
-          {success ? (
+          {success && (
             <h3 className="headMain">Sent success!!, thank you..</h3>
-          ) : (
-            ""
           )}
-
-          {/* Row 1 of form */}
           <div className="from-col">
             <div>
+              <label htmlFor="name">Name</label>
               <input
                 {...register("name", {
                   required: { value: true, message: "Please enter your name" },
@@ -77,9 +61,11 @@ export default function Contact() {
                 })}
                 type="text"
                 name="name"
+                id="name"
                 className="form-control formInput"
                 placeholder="Name"
-              ></input>
+                disabled={loading}
+              />
               {errors.name && (
                 <span className="errorMessage headMain">
                   {errors.name.message}
@@ -87,6 +73,7 @@ export default function Contact() {
               )}
             </div>
             <div>
+              <label htmlFor="email">Email</label>
               <input
                 {...register("email", {
                   required: true,
@@ -95,9 +82,11 @@ export default function Contact() {
                 })}
                 type="email"
                 name="email"
+                id="email"
                 className="form-control formInput"
                 placeholder="Email address"
-              ></input>
+                disabled={loading}
+              />
               {errors.email && (
                 <span className="errorMessage headMain">
                   Please enter a valid email address
@@ -105,9 +94,9 @@ export default function Contact() {
               )}
             </div>
           </div>
-          {/* Row 2 of form */}
           <div className="from-col">
             <div>
+              <label htmlFor="subject">Subject</label>
               <input
                 {...register("subject", {
                   required: { value: true, message: "Please enter a subject" },
@@ -118,9 +107,11 @@ export default function Contact() {
                 })}
                 type="text"
                 name="subject"
+                id="subject"
                 className="form-control formInput"
                 placeholder="Subject"
-              ></input>
+                disabled={loading}
+              />
               {errors.subject && (
                 <span className="errorMessage headMain">
                   {errors.subject.message}
@@ -128,18 +119,20 @@ export default function Contact() {
               )}
             </div>
           </div>
-          {/* Row 3 of form */}
           <div className="from-col">
             <div>
+              <label htmlFor="message">Message</label>
               <textarea
                 {...register("message", {
                   required: true,
                 })}
                 rows={3}
                 name="message"
+                id="message"
                 className="form-control formInputTextAr"
                 placeholder="Message"
-              ></textarea>
+                disabled={loading}
+              />
               {errors.message && (
                 <span className="errorMessage headMain">
                   Please enter a message
@@ -148,11 +141,12 @@ export default function Contact() {
             </div>
           </div>
           <div className="but-box">
-            <button type="submit" className="but-submit ">
-              <h3 className="">Submit</h3>
+            <button type="submit" className="but-submit" disabled={loading}>
+              <h3 className="">{loading ? "Sending..." : "Submit"}</h3>
             </button>
           </div>
         </form>
+        <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar />
       </div>
     </div>
   );
